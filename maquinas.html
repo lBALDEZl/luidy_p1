@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Gourmet - Máquinas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>Máquinas de Café</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="saches.html">Sachês</a></li>
+                <li><a href="maquinas.html">Máquinas</a></li>
+                <li><a href="compras.html">Compras</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="content" >
+
+            <div class="text">
+                <h2>Nossas Máquinas</h2>
+                <p>Encontre a máquina de café perfeita para sua casa ou escritório.</p>
+            </div>
+        
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th colspan="4">Máquinas de Café</th>
+                    </tr>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Modelo</th>
+                        <th>Foto</th>
+                        <th>Preço</th>
+                    </tr>
+                    <tr>
+                        <td>Dolce Gusto</td>
+                            <td>
+                                <a href="#" onclick="DetalheMaquina('piccolo')">
+                                    Piccolo
+                                </a>
+                            </td>
+                       </td>
+                        <td rowspan="4" id="foto_maquina">
+                            <img src="img/vazio.jpg" style="max-height: 100px;">
+                        </td>
+                        <td rowspan="4" id="preco_maquina">
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">Nespresso</td>
+                            <td>
+                                <a href="#" onclick="DetalheMaquina('inissia')">
+                                    Inissia C40
+                                </a>
+                        </td>   
+                    </tr>
+                    <tr>
+                        <td>
+                                <a href="#" onclick="DetalheMaquina('u-c50')">
+                                    U C50
+                                </a>
+                            </td>
+                    </tr>
+                    <tr>
+                        <td>Senseo</td>
+                            <td>
+                                <a href="#" onclick="DetalheMaquina('hd7811')">
+                                    HD7811/96
+                                </a>
+                            </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <script>
+            function DetalheMaquina(modelo) {
+                const fotoMaquina = document.getElementById('foto_maquina');
+                const precoMaquina = document.getElementById('preco_maquina');
+                let foto = '';
+                let preco = '';
+
+                switch(modelo) {
+                    case 'piccolo':
+                        foto = 'img/piccolo.jpg'; 
+                        preco = 'R$340,00';
+                        break;
+                    case 'inissia':
+                        foto = 'img/inissia.jpg';  
+                        preco = 'R$300,00';
+                        break;
+                    case 'u-c50':
+                        foto = 'img/u-c50.jpg';  
+                        preco = 'R$400,00';
+                        break;
+                    case 'hd7811':
+                        foto = 'img/hd7811.jpg';  
+                        preco = 'R$230,00';
+                        break;
+                    default:
+                        foto = '';
+                        preco = '';
+                }
+
+                fotoMaquina.innerHTML = `<img src="${foto}" style="max-height: 100px;">`;
+                precoMaquina.innerText = preco;
+            }
+        </script>
+    </main>
+</body>
+</html>
