@@ -1,3 +1,4 @@
+/*Menu e Navegação*/
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,14 +7,37 @@ body {
 }
 
 header {
-    background-color: #6b4f4f;
+    background-color: #36230d;
     color: white;
-    padding: 20px 0;
+    padding: 10px 0;
     text-align: center;
 }
 
 .banner {
     margin-bottom: 20px;
+}
+
+.logo {
+    position: absolute;
+    left: 20px;
+    top: 1px;
+    
+}
+
+.contact-info {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    text-align: right;
+}
+.contact-info p {
+    margin: 0;
+    padding: 2px;
+}
+
+.contatocafe{
+    text-decoration: underline;
+    color: white;
 }
 
 nav ul {
@@ -36,12 +60,60 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
+
+.header-line {
+    height: 4px; 
+    background-color: #a04d12; 
+    margin-bottom: 10px; 
+}
+
+/*Corpo geral e Textos*/
+
 main {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
+
+.content {
+    align-items: center;
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content h2{
+    color: #1b1313;
+}
+
+.logotipo{
+    max-width: 250px;
+    margin-right: 20px;
+}
+
+.text {
+    max-width: 500px;
+}
+
+.text h2 {
+    color: #1b1313;
+}
+
+.text p {
+    color: #333;
+}
+
+
+/*Página Home*/
+
+.logotipo{
+    max-width: 250px;
+    margin-right: 20px;
+}
+
+/*Página sachês*/
 
 .saches-list {
     text-align: center;
@@ -67,7 +139,7 @@ main {
 }
 
 .saches-centralized ul {
-    list-style: none;
+    list-style: circle;
     padding: 0;
     margin-top: 5px;
 }
@@ -76,31 +148,178 @@ main {
     margin-left: 20px;
 }
 
-.content {
+.saches-centralized ul {
+    padding-left: 18px;
+}
+
+
+/*Página compras*/
+
+.content-compra {
     align-items: center;
     background-color: #fff;
-    padding: 20px;
+    padding: 25px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 610px;
 
-} 
-
-
-.illustrative-image {
-    max-width: 200px;
-    margin-right: 20px;
 }
 
-.text {
-    max-width: 500px;
+.content img {
+    padding-top: 20px;
+    float: left;
+}
+.content-compra img {
+    padding-top: 20px;
+    float: left;
 }
 
-.text h2 {
-    color: #6b4f4f;
+.identification{
+    padding-right: 0px;
+    padding-bottom: 15px;
+    border-bottom-style: solid;
+    border-bottom-color: #382407;
+    border-bottom-width: 1px;
+    
+}
+.identification input[name=name]{
+    width: 230px;
+}
+.identification input[name=phone]{
+    width: 110px;
+}
+.identification input[name=address]{
+    width: 427px;
+}
+.identification input[name=email]{
+    width: 264px;
 }
 
-.text p {
-    color: #333;
+.products{
+    padding-right: 1px;
+    padding-bottom: 15px;
+    border-bottom-style: solid;
+    border-bottom-color: #382407;
+    border-bottom-width: 1px;
+    border-right: #382407 solid 1px;
+    width: 46%;
+
+}
+
+.products input[name=valor]{
+    width: 160px;
+}
+.products button[name=remover]{
+    width: 212px;
+}
+.products textarea{
+    width: 207px;
+    height: 100px;
+    resize: none;
+}
+
+.products select[name=saches]{
+    width: 150px;
+}
+
+.products select[name=maquinas]{
+    width: 134px;
+}
+
+optgroup {
+    font-weight: bold;
+    color: #000000; 
+}
+
+option {
+    padding-left: 10px; 
+}
+
+.payment{
+    position: relative;
+    padding-right: 1px;
+    padding-left: 20px;
+    padding-bottom: 3px;
+    border-bottom-style: solid;
+    border-bottom-color: #382407;
+    border-bottom-width: 1px;
+
+    width: 50%;
+    left: 45%;
+    bottom: 322px;
+}
+
+
+.card-details {
+    display: flex;
+    gap: 5px;
+    
+
+}
+.card-details img{
+    position: relative;
+    bottom: 15px;
+}
+
+.card-details label {
+    display: flex;
+    align-items: left;
+    gap: 10px; 
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.card-details input[type="radio"] {
+    cursor: pointer;
+}
+
+.inputcartao input{
+    margin-bottom: 14px;
+}
+
+.inputcartao input[name="expiry-date"]{
+    width: 30px;
+}
+.inputcartao input[name="expiry-month"]{
+    width: 50px;
+    
+}
+
+.form-actions {
+    display: flex;
+    justify-content: right; 
+    gap: 10px; 
+    margin-top: 20px; 
+    position: relative;
+    bottom: 330px;
+}
+
+.form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-actions button:hover {
+    background-color: #0056b3;
+}
+
+.form-actions button[type="reset"] {
+    background-color: #dc3545;
+}
+
+.form-actions button[type="reset"]:hover {
+    background-color: #c82333;
+}
+
+/*Página Máquinas*/
+
+#text-maquina{
+    text-align: center;
 }
 
 .table-container {
@@ -115,34 +334,19 @@ table {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd;
     padding: 8px;
     text-align: center;
 
 }
 
+td img {
+    max-width: 90px; 
+    height: auto; 
+}
+
 
 th {
-    background-color: #6b4f4f;
+    background-color: #5e331f;
     color: white;
 }
-
-img {
-
-}
-
-  td a {
-            color: #333;
-            text-decoration: none;
-            
-        }
-
-         td a:visited {
-            color: #662222;
-        }
-
-        td a:hover {
-            color: #0066cc;
-        }
-
- 
