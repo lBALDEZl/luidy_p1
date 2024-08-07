@@ -62,39 +62,39 @@
                 <form class="form_products">
                     <label for="maquinas">Máquinas:</label>
                     <select id="maquinas" name="maquinas">
-                        <option><strong>---</strong></option>
+                        <option value="">---</option>
                         <optgroup label=" Dolce Gusto">
-                            <option value="piccolo"> Piccolo </option>
+                            <option value="piccolo" preco="340.00">Piccolo</option>
                         </optgroup>
                         <optgroup label="Nespresso">
-                            <option value="inissiac40"> Inissia C40 </option> 
-                            <option value="uc50"> U C50 </option>  
+                            <option value="inissiac40" preco="300.00">Inissia C40</option>
+                            <option value="uc50" preco="400.00">U C50</option>
                         </optgroup>
                         <optgroup label="Senseo">          
-                            <option value="hd7811/96"> Hd7811/96 </option>
+                            <option value="hd7811/96" preco="230.00">HD7811/96</option>
                         </optgroup>
                     </select><br><br>
 
                     <label for="saches">Sachês:</label>
                     <select id="saches" name="saches">
-                        <option><strong>---</strong></option>
+                        <option value="">---</option>
                         <optgroup label=" Dolce Gusto">
-                            <option value="Expresso"> Expresso </option>
-                            <option value="Descafeinado"> Descafeinado</option>
+                            <option value="expresso" preco="24.00">Expresso</option>
+                            <option value="descafeinado" preco="21.00">Descafeinado</option>
                         </optgroup>
                         <optgroup label="Nespresso">
-                            <option value="Livanto"> Livanto </option> 
-                            <option value="Ristretto"> Ristretto </option>  
-                            <option value="Vanillo"> Vanillo </option>
+                            <option value="livanto" preco="35.00">Livanto</option> 
+                            <option value="ristretto" preco="42.00">Ristretto</option>  
+                            <option value="vanilio" preco="46.00">Vanilio</option>
                         </optgroup>
                         <optgroup label="Senseo">          
-                            <option value="Clássico"> Clássico</option>
-                            <option value="Intenso"> Intenso </option>
+                            <option value="classico" preco="14.00">Clássico</option>
+                            <option value="intenso" preco="14.00">Intenso</option>
                         </optgroup>
                     </select><br><br>
 
                     <button type="button" name="remover">Remover Selecionados</button><br><br>
-                    <textarea id="itens" name="itens"></textarea><br>
+                    <textarea id="itens" name="itens" readonly></textarea><br>
                     <label for="total">Valor:</label>
                     <input type="text" id="valor" name="valor" disabled>
                 </form>
@@ -125,13 +125,13 @@
                         <br><br><br>
                     </form>
                     <form class="inputcartao">
-                        <label for="card-number">Número:</label>
-                        <input type="text" id="card-number" name="card-number" required><br>
 
                         <label for="expiry-date">Validade:</label>
                         <input type="text" id="expiry-date" name="expiry-date" placeholder="mês" required>
                         /
-                        <input type="text" id="expiry-month" name="expiry-month" placeholder="ano" >
+                        <input type="text" id="expiry-month" name="expiry-month" placeholder="ano" ><br>
+                        <label for="card-number">Número:</label>
+                        <input type="text" id="card-number" name="card-number" required>
                     </form>
                 </div>
             </div>
@@ -142,6 +142,8 @@
         </div>
     </main>
 </body>
+
+<!--Script para verificação do CPF-->
 <script>
     document.getElementById('cpf').addEventListener('input', function () {
         const cpf = this.value;
@@ -151,7 +153,7 @@
         if (!/^\d*$/.test(cpf)) {
             errorMessage = 'CPF só pode ter dígitos';
         } else {
-            if (cpf.length < 11) {
+            if (cpf.length < 11 || cpf.length> 11  ) {
                 errorMessage = 'CPF deve ter 11 dígitos';
             } else if (cpf.length === 11) {
                 if (!verificaDigitosVerificacao(cpf)) {
@@ -159,28 +161,24 @@
                 }
             }
         }
-    
-        // Atualiza o span de erro
+ 
         if (errorMessage) {
-            errorSpan.textContent = errorMessage;
+            errorSpan.innerHTML = errorMessage;
             errorSpan.style.display = 'block';
         } else {
-            errorSpan.textContent = '';
+            errorSpan.innerHTML = '';
             errorSpan.style.display = 'none';
         }
     });
-    
-    // Função para verificar os dígitos de verificação
+
     function verificaDigitosVerificacao(cpf) {
-        const identCPF = parseInt(cpf.slice(0, 9), 10); // Captura os primeiros 9 dígitos
+        const identCPF = parseInt(cpf.slice(0, 9), 10); 
     
         const primeiro_digito = calculaDV(identCPF);
         const segundo_digito = calculaDV(identCPF * 10 + primeiro_digito);
     
         return cpf[9] == primeiro_digito && cpf[10] == segundo_digito;
     }
-    
-    // Função para calcular o dígito verificador
     function calculaDV(num) {
         var resto = 0, soma = 0;
         for (let i = 2; i < 11; i++) {
@@ -190,6 +188,36 @@
         resto = (soma % 11);
         return (resto > 1) ? (11 - resto) : 0;
     }
-    </script>
+</script>
+
+<!--Script para inclusão de itens e somatório do valor-->
+<script>
+    
+function atualizarListaEValor(selecao) {
+    const itemSelecionado = selecao.value;
+    const preco = selecao.selectedOptions[0].getAttribute('preco');
+    const listaItens = document.getElementById('itens');
+    const campoValor = document.getElementById('valor');
+
+    if (itemSelecionado) {
+        const itemTexto = selecao.selectedOptions[0].text;
+        listaItens.innerHTML += itemTexto + ' - R$ ' + preco + '\n';
+
+        const valorAtual = parseFloat(campoValor.value) || 0;
+        campoValor.value= (valorAtual + parseFloat(preco)).toFixed(2);
+    }
+
+    selecao.value = '';
+}
+
+document.getElementById('maquinas').addEventListener('change', function() {
+    atualizarListaEValor(this);
+});
+
+document.getElementById('saches').addEventListener('change', function() {
+    atualizarListaEValor(this);
+});
+
+</script>
 </html>
                
