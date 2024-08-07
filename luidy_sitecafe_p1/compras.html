@@ -37,12 +37,14 @@
         
             <div class="identification">
                 <h3>Dados de Identificação</h3>
+        
                 <form class="form_identification">
                     <label for="name">Nome:</label>
                     <input type="text" id="name" name="name" required>
 
                     <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" name="cpf" required><br><br>
+                    <input type="text" id="cpf" name="cpf" required>
+                    <span id="cpf-error" class="error-message"></span><br><br>
 
                     <label for="phone">Telefone:</label>
                     <input type="tel" id="phone" name="phone" required>
@@ -140,5 +142,54 @@
         </div>
     </main>
 </body>
+<script>
+    document.getElementById('cpf').addEventListener('input', function () {
+        const cpf = this.value;
+        const errorSpan = document.getElementById('cpf-error');
+        let errorMessage = '';
+    
+        if (!/^\d*$/.test(cpf)) {
+            errorMessage = 'CPF só pode ter dígitos';
+        } else {
+            if (cpf.length < 11) {
+                errorMessage = 'CPF deve ter 11 dígitos';
+            } else if (cpf.length === 11) {
+                if (!verificaDigitosVerificacao(cpf)) {
+                    errorMessage = 'Verificação de dígitos inválida';
+                }
+            }
+        }
+    
+        // Atualiza o span de erro
+        if (errorMessage) {
+            errorSpan.textContent = errorMessage;
+            errorSpan.style.display = 'block';
+        } else {
+            errorSpan.textContent = '';
+            errorSpan.style.display = 'none';
+        }
+    });
+    
+    // Função para verificar os dígitos de verificação
+    function verificaDigitosVerificacao(cpf) {
+        const identCPF = parseInt(cpf.slice(0, 9), 10); // Captura os primeiros 9 dígitos
+    
+        const primeiro_digito = calculaDV(identCPF);
+        const segundo_digito = calculaDV(identCPF * 10 + primeiro_digito);
+    
+        return cpf[9] == primeiro_digito && cpf[10] == segundo_digito;
+    }
+    
+    // Função para calcular o dígito verificador
+    function calculaDV(num) {
+        var resto = 0, soma = 0;
+        for (let i = 2; i < 11; i++) {
+            soma = soma + ((num % 10) * i);
+            num = parseInt(num / 10);
+        }
+        resto = (soma % 11);
+        return (resto > 1) ? (11 - resto) : 0;
+    }
+    </script>
 </html>
                

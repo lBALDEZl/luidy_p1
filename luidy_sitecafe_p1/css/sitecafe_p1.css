@@ -195,6 +195,16 @@ main {
     width: 264px;
 }
 
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-left: 10px;
+    display: none;
+    position: absolute;
+    top: 318px;
+    right: 253px;
+}
+
 .products{
     padding-right: 1px;
     padding-bottom: 15px;
