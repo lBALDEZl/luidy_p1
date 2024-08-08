@@ -132,6 +132,7 @@
                         <input type="text" id="expiry-month" name="expiry-month" placeholder="ano" ><br>
                         <label for="card-number">Número:</label>
                         <input type="text" id="card-number" name="card-number" required>
+                        <span id="card-error"></span>
                     </form>
                 </div>
             </div>
@@ -218,6 +219,70 @@ document.getElementById('saches').addEventListener('change', function() {
     atualizarListaEValor(this);
 });
 
+</script>
+<!--Script para verificar cartão-->
+<script>
+    document.getElementById('card-number').addEventListener('keyup', function() {
+    const cardNumberInput = this.value;
+    const cardNumber = cardNumberInput.replace(/\D/g, '');
+    const visa = document.getElementById('visa');
+    const mastercard = document.getElementById('mastercard');
+    const amex = document.getElementById('amex');
+    const cardError = document.getElementById('card-error');
+
+    visa.checked = false;
+    mastercard.checked = false;
+    amex.checked = false;
+
+    if (/\D/.test(cardNumberInput)) {
+        showError('Somente números são permitidos');
+        return; 
+    }
+
+    if (cardNumber.length >= 1) {
+        const firstDigit = cardNumber.charAt(0);
+
+        if (firstDigit !== '3' && firstDigit !== '4' && firstDigit !== '5') {
+            showError('Cartão Inválido');
+        } else if (firstDigit === '4') {
+            visa.checked = true;
+            checkCardLength(cardNumber.length);
+        } else if (firstDigit === '5') {
+            if (cardNumber.length >= 2) {
+                const firstTwoDigits = parseInt(cardNumber.substr(0, 2), 10);
+                if (firstTwoDigits >= 51 && firstTwoDigits <= 55) {
+                    mastercard.checked = true;
+                    checkCardLength(cardNumber.length);
+                } else {
+                    showError('Cartão Inválido');
+                }
+            }
+        } else if (firstDigit === '3') {
+            if (cardNumber.length >= 2) {
+                const firstTwoDigits = cardNumber.substr(0, 2);
+                if (firstTwoDigits === '34' || firstTwoDigits === '37') {
+                    amex.checked = true;
+                    checkCardLength(cardNumber.length);
+                } else {
+                    showError('Cartão Inválido');
+                }
+            }
+        }
+    }
+});
+
+function showError(message) {
+    const cardError = document.getElementById('card-error');
+    cardError.textContent = message;
+    cardError.style.display = 'inline';
+}
+
+function checkCardLength(length) {
+    if (length < 13 || length > 16) {
+        showError('O cartão deve ter entre 13 e 16 dígitos');
+    }
+}
+    </script>
 </script>
 </html>
                
