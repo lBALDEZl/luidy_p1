@@ -44,7 +44,7 @@
 
                     <label for="cpf">CPF:</label>
                     <input type="text" id="cpf" name="cpf" required>
-                    <span id="cpf-error" class="error-message"></span><br><br>
+                    <span id="cpf-error" class="error-message">Error</span><br><br>
 
                     <label for="phone">Telefone:</label>
                     <input type="tel" id="phone" name="phone" required>
@@ -132,7 +132,7 @@
                         <input type="text" id="expiry-month" name="expiry-month" placeholder="ano" ><br>
                         <label for="card-number">Número:</label>
                         <input type="text" id="card-number" name="card-number" required>
-                        <span id="card-error"></span>
+                        <span id="card-error"> Erro </span>
                     </form>
                 </div>
             </div>
@@ -192,8 +192,7 @@
 </script>
 
 <!--Script para inclusão de itens e somatório do valor-->
-<script>
-    
+<script>  
 function atualizarListaEValor(selecao) {
     const itemSelecionado = selecao.value;
     const preco = selecao.selectedOptions[0].getAttribute('preco');
@@ -220,69 +219,80 @@ document.getElementById('saches').addEventListener('change', function() {
 });
 
 </script>
-<!--Script para verificar cartão-->
+
+<!--Script para cartão de crédito-->
 <script>
     document.getElementById('card-number').addEventListener('keyup', function() {
-    const cardNumberInput = this.value;
-    const cardNumber = cardNumberInput.replace(/\D/g, '');
-    const visa = document.getElementById('visa');
-    const mastercard = document.getElementById('mastercard');
-    const amex = document.getElementById('amex');
-    const cardError = document.getElementById('card-error');
+        const cardNumberInput = this.value;
+        const cardNumber = cardNumberInput.replace(/\D/g, ''); 
+        const visa = document.getElementById('visa');
+        const mastercard = document.getElementById('mastercard');
+        const amex = document.getElementById('amex');
+        const cardError = document.getElementById('card-error');
 
-    visa.checked = false;
-    mastercard.checked = false;
-    amex.checked = false;
+        visa.checked = false;
+        mastercard.checked = false;
+        amex.checked = false;
 
-    if (/\D/.test(cardNumberInput)) {
-        showError('Somente números são permitidos');
-        return; 
-    }
+        if (/\D/.test(cardNumberInput) && cardNumberInput !== '') {
+            Error('Somente números são permitidos');
+            return; 
+        }
 
-    if (cardNumber.length >= 1) {
-        const firstDigit = cardNumber.charAt(0);
+        if (cardNumber.length >= 13 && cardNumber.length <= 16) {
+            cardError.style.display = 'none';
+        }
 
-        if (firstDigit !== '3' && firstDigit !== '4' && firstDigit !== '5') {
-            showError('Cartão Inválido');
-        } else if (firstDigit === '4') {
-            visa.checked = true;
-            checkCardLength(cardNumber.length);
-        } else if (firstDigit === '5') {
-            if (cardNumber.length >= 2) {
-                const firstTwoDigits = parseInt(cardNumber.substr(0, 2), 10);
-                if (firstTwoDigits >= 51 && firstTwoDigits <= 55) {
-                    mastercard.checked = true;
-                    checkCardLength(cardNumber.length);
-                } else {
-                    showError('Cartão Inválido');
+        if (cardNumber.length >= 1) {
+            const firstDigit = cardNumber[0];
+
+            if (firstDigit !== '3' && firstDigit !== '4' && firstDigit !== '5') {
+                Error('Cartão Inválido');
+            } else if (firstDigit === '4') {
+                visa.checked = true;
+                checkCardLength(cardNumber.length);
+            } else if (firstDigit === '5') {
+                checkCardLength(cardNumber.length);
+                if (cardNumber.length >= 2) {
+                    const firstTwoDigits = parseInt(cardNumber.slice(0, 2));
+                    if (firstTwoDigits >= '51' && firstTwoDigits <= '55') {
+                        mastercard.checked = true;
+                        checkCardLength(cardNumber.length);
+                    } else {
+                        Error('Cartão Inválido');
+                    }
                 }
-            }
-        } else if (firstDigit === '3') {
-            if (cardNumber.length >= 2) {
-                const firstTwoDigits = cardNumber.substr(0, 2);
-                if (firstTwoDigits === '34' || firstTwoDigits === '37') {
-                    amex.checked = true;
-                    checkCardLength(cardNumber.length);
-                } else {
-                    showError('Cartão Inválido');
+            } else if (firstDigit === '3') {
+                checkCardLength(cardNumber.length);
+                if (cardNumber.length >= 2) {
+                    const firstTwoDigits = cardNumber.slice(0, 2);
+                    if (firstTwoDigits === '34' || firstTwoDigits === '37') {
+                        amex.checked = true;
+                        checkCardLength(cardNumber.length);
+                    } else {
+                        Error('Cartão Inválido');
+                    }
                 }
             }
         }
-    }
-});
+    });
 
-function showError(message) {
-    const cardError = document.getElementById('card-error');
-    cardError.textContent = message;
-    cardError.style.display = 'inline';
-}
-
-function checkCardLength(length) {
-    if (length < 13 || length > 16) {
-        showError('O cartão deve ter entre 13 e 16 dígitos');
+    function Error(mensagem) {
+        const cardError = document.getElementById('card-error');
+        cardError.textContent = mensagem;
+        cardError.style.display = 'block' ;
     }
-}
-    </script>
+
+    function checkCardLength(length) {
+        if (length < 13 || length > 16) {
+            Error('O cartão deve ter entre 13 e 16 dígitos');
+        }
+    }
 </script>
+
+<script>
+
+</script>
+
 </html>
                
