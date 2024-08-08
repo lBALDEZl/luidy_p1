@@ -361,13 +361,24 @@ th, td {
 
 }
 
-td img {
-    max-width: 90px; 
-    height: auto; 
-}
-
-
 th {
     background-color: #5e331f;
     color: white;
 }
+
+
+  td a {
+            color: #333;
+            text-decoration: none;
+            
+        }
+
+         td a:visited {
+            color: #662222;
+        }
+
+        td a:hover {
+            color: #0066cc;
+        }
+
+
