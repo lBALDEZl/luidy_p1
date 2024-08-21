@@ -358,6 +358,7 @@ option {
 
 #preco_maquina{
     font-weight: bold;
+    color: rgb(173, 14, 14);
 }
 
 #foto_maquina {
@@ -412,11 +413,11 @@ th {
 
 
   td a {
-        color: #130505;
+        color: #573218;
         text-decoration: none; 
         }
          td a:visited{
-            color: #350a0e;
+            color: #662222;
          }
 
          td a:active {
@@ -424,7 +425,7 @@ th {
         }
 
         td a:hover {
-            color: #ff5e00;
+            color: #a36c05;
         }
 
 
