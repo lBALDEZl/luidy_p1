@@ -39,30 +39,116 @@
                 <h2>Sachês de Café Expresso</h2>
                 <ol class="saches-centralized">
                     <li>
-                        <strong> 1. Dolce Gusto (Caixa 16 cápsulas):</strong>
-                        <ul>
-                            <li> Expresso 96g - R$ 24,00</li>
-                            <li> Descafeinado 96g - R$ 21,00</li>
-                        </ul>
+                        <a href="#" onclick="abrirJanela('Dolce Gusto', 'Caixa 16 cápsulas', 'img/CapsulaDulceGusto.jpg', [
+                          {nome: 'Expresso 96g - R$ 24,00', imagem: 'img/CapsulaDulceGusto.jpg'},
+                          {nome: 'Descafeinado 96g - R$ 21,00', imagem: 'img/CapsulaDulceGustoDescafeinado.jpg'}
+                        ])">
+                            <strong>1. Dolce Gusto (Caixa 16 cápsulas)</strong>
+                        </a>
                     </li>
                     <li>
-                        <strong> 2. Senseo (18 sachês):</strong>
-                        <ul>
-                            <li> Clássico 120g - R$ 14,00</li>
-                            <li> Intenso 120g - R$ 14,00</li>
-                        </ul>
+                        <a href="#" onclick="abrirJanela('Senseo', 'Caixa 18 sachês', 'img/Senseo_Classico.jpg', [
+                          {nome: 'Clássico 120g - R$ 14,00', imagem: 'img/Senseo_Classico.jpg'},
+                          {nome: 'Intenso 120g - R$ 14,00', imagem: 'img/SenseoIntenso.jpg'}
+                        ])">
+                            <strong>2. Senseo (18 sachês)</strong>
+                        </a>
                     </li>
                     <li>
-                        <strong> 3. Nespresso (20 cápsulas):</strong>
-                        <ul>
-                            <li> Livanto - R$ 35,00</li>
-                            <li> Ristretto - R$ 42,00</li>
-                            <li> Vanilio - R$ 46,00</li>
-                        </ul>
+                        <a href="#" onclick="abrirJanela('Nespresso', 'Caixa 20 cápsulas', 'img/NespressoLivanto.png', [
+                          {nome: 'Livanto - R$ 35,00', imagem: 'img/NespressoLivanto.png'},
+                          {nome: 'Ristretto - R$ 42,00', imagem: 'img/NespressoRistretto.png'},
+                          {nome: 'Vanilio - R$ 46,00', imagem: 'img/NespressoVanilio.png'}
+                        ])">
+                            <strong>3. Nespresso (20 cápsulas)</strong>
+                        </a>
                     </li>
                 </ol>
             </div>
         </div>
     </main>
+
+    <script>
+        function abrirJanela(nome, quantidade, imagemInicial, produtos) {
+            const largura = 280;
+            const altura = 460;
+            const left = (window.innerWidth - largura) / 2;
+            const top = (window.innerHeight - altura) / 2;
+
+            const novaJanela = window.open('', '', `width=${largura},height=${altura},left=${left},top=${top},resizable=no`);
+
+            let listaProdutos = '';
+            for (let i = 0; i < produtos.length; i++) {
+                listaProdutos += `<li>
+                    <a href="#" onmouseover="document.getElementById('imagemProduto').src='${produtos[i].imagem}'">${produtos[i].nome}</a>
+                </li>`;
+            }
+
+            novaJanela.document.write(`
+                <!DOCTYPE html>
+                <html lang="pt-br">
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        body {
+                            background-color: #421f05; 
+                            color: #fff;
+                            font-family: Arial, sans-serif;
+                            text-align: center;
+                            padding: 20px;
+                            margin: 0;
+                            overflow: hidden; 
+                        }
+                        h1, h2 {
+                            margin: 0;
+                            padding: 10px 0;
+                        }
+                        img {
+                            width: 130px;
+                            height: auto;
+                            margin: 10px 0;
+                        }
+                        ul {
+                            list-style: none;
+                            padding: 0;
+                        }
+                        ul li {
+                            margin: 15px 0;
+                        }
+                        a {
+                            color: #fff;
+                            text-decoration: none;
+                        }
+                        a:hover {
+                            color: #fff;
+                            text-decoration: none;
+                        }
+                        button {
+                            margin-top: 20px;
+                            padding: 10px 30px;
+                            background-color: #c2190a;
+                            border: none;
+                            color: #ffffff;
+                            cursor: pointer;
+                            border-radius: 10px;
+                        }
+                        button:hover {
+                            background-color: #f20707;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>${nome}</h1>
+                    <h2>${quantidade}</h2>
+                    <img id="imagemProduto" src="${imagemInicial}" alt="${nome}">
+                    <ul>
+                        ${listaProdutos}
+                    </ul>
+                    <button onclick="window.close()">Fechar</button>
+                </body>
+                </html>
+            `);
+        }
+    </script>
 </body>
 </html>

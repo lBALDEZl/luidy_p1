@@ -223,8 +223,8 @@ document.getElementById('saches').addEventListener('change', function() {
 <!--Script para cartão de crédito-->
 <script>
     document.getElementById('card-number').addEventListener('keyup', function() {
-        const cardNumberInput = this.value;
-        const cardNumber = cardNumberInput.replace(/\D/g, ''); 
+        const CartaoValor = this.value;
+        const NumeroCartao = CartaoValor.replace(/\D/g, ''); 
         const visa = document.getElementById('visa');
         const mastercard = document.getElementById('mastercard');
         const amex = document.getElementById('amex');
@@ -234,58 +234,58 @@ document.getElementById('saches').addEventListener('change', function() {
         mastercard.checked = false;
         amex.checked = false;
 
-        if (/\D/.test(cardNumberInput) && cardNumberInput !== '') {
-            Error('Somente números são permitidos');
+        if (/\D/.test(CartaoValor) && CartaoValor !== '') {
+            Erro('Somente números são permitidos');
             return; 
         }
 
-        if (cardNumber.length >= 13 && cardNumber.length <= 16) {
+        if (NumeroCartao.length >= 13 && NumeroCartao.length <= 16) {
             cardError.style.display = 'none';
         }
 
-        if (cardNumber.length >= 1) {
-            const firstDigit = cardNumber[0];
+        if (NumeroCartao.length >= 1) {
+            const primeiroDigito = NumeroCartao[0];
 
-            if (firstDigit !== '3' && firstDigit !== '4' && firstDigit !== '5') {
-                Error('Cartão Inválido');
-            } else if (firstDigit === '4') {
+            if (primeiroDigito !== '3' && primeiroDigito !== '4' && primeiroDigito !== '5') {
+                Erro('Cartão Inválido');
+            } else if (primeiroDigito === '4') {
                 visa.checked = true;
-                checkCardLength(cardNumber.length);
-            } else if (firstDigit === '5') {
-                checkCardLength(cardNumber.length);
-                if (cardNumber.length >= 2) {
-                    const firstTwoDigits = parseInt(cardNumber.slice(0, 2));
-                    if (firstTwoDigits >= '51' && firstTwoDigits <= '55') {
+                TamanhoCartao(NumeroCartao.length);
+            } else if (primeiroDigito === '5') {
+                TamanhoCartao(NumeroCartao.length);
+                if (NumeroCartao.length >= 2) {
+                    const doisDigitos = parseInt(NumeroCartao.slice(0, 2));
+                    if (doisDigitos >= '51' && doisDigitos <= '55') {
                         mastercard.checked = true;
-                        checkCardLength(cardNumber.length);
+                        TamanhoCartao(NumeroCartao.length);
                     } else {
-                        Error('Cartão Inválido');
+                        Erro('Cartão Inválido');
                     }
                 }
-            } else if (firstDigit === '3') {
-                checkCardLength(cardNumber.length);
-                if (cardNumber.length >= 2) {
-                    const firstTwoDigits = cardNumber.slice(0, 2);
-                    if (firstTwoDigits === '34' || firstTwoDigits === '37') {
+            } else if (primeiroDigito === '3') {
+                TamanhoCartao(NumeroCartao.length);
+                if (NumeroCartao.length >= 2) {
+                    const doisDigitos= NumeroCartao.slice(0, 2);
+                    if (doisDigitos === '34' || doisDigitos === '37') {
                         amex.checked = true;
-                        checkCardLength(cardNumber.length);
+                        TamanhoCartao(NumeroCartao.length);
                     } else {
-                        Error('Cartão Inválido');
+                        Erro('Cartão Inválido');
                     }
                 }
             }
         }
     });
 
-    function Error(mensagem) {
+    function Erro(mensagem) {
         const cardError = document.getElementById('card-error');
         cardError.textContent = mensagem;
         cardError.style.display = 'block' ;
     }
 
-    function checkCardLength(length) {
+    function TamanhoCartao(length) {
         if (length < 13 || length > 16) {
-            Error('O cartão deve ter entre 13 e 16 dígitos');
+            Erro('O cartão deve ter entre 13 e 16 dígitos');
         }
     }
 </script>
