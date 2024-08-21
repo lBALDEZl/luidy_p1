@@ -124,6 +124,17 @@ main {
     margin-bottom: 10px;
 }
 
+.saches-list a{
+    color: black; 
+    text-decoration: none; 
+    font-weight: bold;
+}
+
+.saches-list a:hover{
+    color: #d4ac0d; 
+    text-decoration: underline;
+}
+
 .saches-centralized {
     list-style: none;
     padding: 0;
@@ -151,6 +162,7 @@ main {
 .saches-centralized ul {
     padding-left: 18px;
 }
+
 
 
 /*Página compras*/
@@ -202,7 +214,8 @@ main {
     display:none;
     position: absolute;
     top: 318px;
-    right: 253px;
+    left: 54%;
+
 }
 
 
@@ -360,25 +373,28 @@ th, td {
     text-align: center;
 
 }
+td{
+    
+}
 
 th {
-    background-color: #5e331f;
+    background-color: #4b210d;
     color: white;
 }
 
 
   td a {
-            color: #333;
+            color: #cc1818;
             text-decoration: none;
             
         }
 
          td a:visited {
-            color: #662222;
+            color: #080101;
         }
 
         td a:hover {
-            color: #0066cc;
+            color: #fc8618;
         }
 
 
