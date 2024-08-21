@@ -356,6 +356,25 @@ option {
     text-align: center;
 }
 
+#preco_maquina{
+    font-weight: bold;
+}
+
+#foto_maquina {
+    justify-content: center; 
+    align-items: center;
+    height: 100%; 
+}
+
+#foto_maquina img {
+    max-height: 100%; 
+    max-width: 100%;  
+    object-fit: contain;
+    position: relative; 
+    bottom: 10px;
+    left: 5px;
+}
+
 .table-container {
     width: 100%;
     overflow-x: auto;
@@ -368,33 +387,44 @@ table {
 }
 
 th, td {
-    border: 1px solid #dddddd;
+    border: 1px solid #332305;
     padding: 8px;
     text-align: center;
 
 }
+.maquinatd {
+    font-weight: bold; 
+    background-color: #e9b88b; 
+     
+}
 td{
-    
+    background-color: #e08f55;
 }
 
+.fototd{
+    background-color: #ffffff;
+    
+}
 th {
-    background-color: #4b210d;
+    background-color: #6d442c;
     color: white;
 }
 
 
   td a {
-            color: #cc1818;
-            text-decoration: none;
-            
+        color: #130505;
+        text-decoration: none; 
         }
+         td a:visited{
+            color: #350a0e;
+         }
 
-         td a:visited {
-            color: #080101;
+         td a:active {
+            color: #380e06;
         }
 
         td a:hover {
-            color: #fc8618;
+            color: #ff5e00;
         }
 
 
